@@ -39,11 +39,8 @@ def main():
     cmds.downloadManager()
 
 def draft():
-    from urllib.request import urlopen
-    link = "http://www.cit.ctu.edu.vn/~dtnghi/oss/python.pdf"
-    site = urlopen(link)
-    meta = site.info()
-    print(meta.get("Content-Length"))
+    import urllib.request
+    local_filename, headers = urllib.request.urlretrieve('http://python.org/')
 
 if __name__ == "__main__":
-    main()
+    draft()
