@@ -2,6 +2,7 @@ import urllib.request
 
 from service.DownloadProgressBar import DownloadProgressBar
 from service.ThreadedFetch import ThreadedFetch
+from service.DownloadFiles import DownloadFiles
 
 
 def download_default(url, destination, file_name):
@@ -24,3 +25,8 @@ def download_separated_threads(url, destination, file_name):
         with open("{}/{}".format(destination, file_name), 'w') as fh:
             fh.write(str(content))
         print("Finished Writing file %s" % file_name)
+
+
+def download_multithreading(urls, destination):
+    d = DownloadFiles(urls, destination)
+    d.download()
