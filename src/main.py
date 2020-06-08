@@ -8,7 +8,7 @@ def display_trademark():
     print(figlet.renderText("Stupid Downloader"))
 
 
-def main():
+def other_main():
     display_trademark()
     cmds.downloadManager()
 
@@ -35,7 +35,7 @@ def main():
     # print(answer)
 
 
-def other_main():
+def main():
     cmds.downloadManager()
 
 

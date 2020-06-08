@@ -4,5 +4,7 @@ downloaded/**
 
 dist/**
 
+Pipfile.lock
+
 *.pdf
 !spec/**/*.pdf

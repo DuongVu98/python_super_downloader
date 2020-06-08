@@ -1,19 +1,24 @@
 # Python Super Downloader
 
 ## How to run
-### clone the source code
+### Clone the source code
 
-### install all packages
+### Generate lock file
 ```bash
-pipenv update
+pipenv lock
 ```
 
-### run setup file to install all packages
+### Install all packages
+```bash
+pipenv install
+```
+
+### Run setup file to install all local packages
 ```bash
 pipenv run runSetup
 ```
 
-### run the program
+### Run the program
 ```bash
 pipenv runDefault
 ```
