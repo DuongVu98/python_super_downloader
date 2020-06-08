@@ -27,6 +27,8 @@ def download_separated_threads(url, destination, file_name):
         print("Finished Writing file %s" % file_name)
 
 
-def download_multithreading(urls, destination):
-    d = DownloadFiles(urls, destination)
-    d.download()
+def download_single_thread(url, destination, progress_bar_position):
+    file_name = url.split('/')[-1]
+
+    with DownloadProgressBar(unit='B', unit_scale=True, miniters=1, desc=file_name, position=progress_bar_position) as t:
+        urllib.request.urlretrieve(url, filename="{}/{}".format(destination, file_name), reporthook=t.update_to)

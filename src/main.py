@@ -17,6 +17,7 @@ def draft():
     urls = [
         "http://quatest1.com.vn/images/PHP-DocumentFull.pdf",
         "http://do1.dr-chuck.com/pythonlearn/EN_us/pythonlearn.pdf"
+        "https://riptutorial.com/Download/node-js.pdf"
     ]
     destination = "downloaded"
     d = DownloadFiles(urls, destination)
