@@ -14,12 +14,13 @@ yelpapi = "*"
 click = "*"
 pyfiglet = "*"
 pysmartdl = "*"
+progressbar = "*"
 
 [requires]
 python_version = "3.7"
 
 [scripts]
-runDefault = "python src/main.py"
+runHelp = "python src/main.py"
 runExample = "python src/main.py download http://www.cit.ctu.edu.vn/~dtnghi/oss/python.pdf"
 runModule = "python -m src"
 runSetup = "python setup.py develop"

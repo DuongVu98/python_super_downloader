@@ -1,23 +1,20 @@
+from tqdm.auto import tqdm
+import urllib
 import requests
-from tqdm import tqdm
-from pySmartDL import SmartDL
+import progressbar
 
 
-def download_default(url):
-    chunk_size = 1024
-    req = requests.get(url, stream=True)
-
-    total_size = int(req.headers['content-length'])
-
-    with open("downloaded/download.pdf", 'wb') as file:
-        for data in tqdm(iterable=req.iter_content(chunk_size), total=total_size / chunk_size, unit="KB"):
-            file.write(data)
+class DownloadProgressBar(tqdm):
+    def update_to(self, b=1, bsize=1, tsize=None):
+        if tsize is not None:
+            self.total = tsize
+        self.update(b * bsize - self.n)
 
 
-def download_smart(url, dest):
-    obj = SmartDL(url, dest)
-    obj.start(blocking=False)
+def download_default(url, destination, file_name):
+    if file_name is None:
+        file_name = url.split('/')[-1]
 
-    tqdm(iterable=obj.filesize, unit="KB")
+    with DownloadProgressBar(unit='B', unit_scale=True, miniters=1, desc=file_name) as t:
+        urllib.request.urlretrieve(url, filename="{}/{}".format(destination, file_name), reporthook=t.update_to)
 
-    print("Downloaded file successfully to {}".format(obj.get_dest()))
