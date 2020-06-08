@@ -1,6 +1,6 @@
 from pyfiglet import Figlet
 from PyInquirer import style_from_dict, prompt, Token, Separator
-from api import commands as cmds
+from api import commands
 
 
 def display_trademark():
@@ -10,7 +10,7 @@ def display_trademark():
 
 def other_main():
     display_trademark()
-    cmds.downloadManager()
+    commands.downloadManager()
 
     style = style_from_dict({
         Token.Separator: "#fff",
@@ -36,11 +36,20 @@ def other_main():
 
 
 def main():
-    cmds.downloadManager()
+    commands.downloadManager()
+
 
 def draft():
-    import urllib.request
-    local_filename, headers = urllib.request.urlretrieve('http://python.org/')
+    from service.DownloadFiles import DownloadFiles
+    urls = [
+        "http://quatest1.com.vn/images/PHP-DocumentFull.pdf",
+        "http://do1.dr-chuck.com/pythonlearn/EN_us/pythonlearn.pdf"
+    ]
+    destination = "downloaded"
+    d = DownloadFiles(urls, destination)
+    d.download()
+
 
 if __name__ == "__main__":
-    main()
+    display_trademark()
+    draft()

@@ -1,14 +1,7 @@
-from tqdm.auto import tqdm
-import urllib
+import urllib.request
 
-from service.downloader_separated_parts import ThreadedFetch
-
-
-class DownloadProgressBar(tqdm):
-    def update_to(self, b=1, bsize=1, tsize=None):
-        if tsize is not None:
-            self.total = tsize
-        self.update(b * bsize - self.n)
+from service.DownloadProgressBar import DownloadProgressBar
+from service.ThreadedFetch import ThreadedFetch
 
 
 def download_default(url, destination, file_name):
