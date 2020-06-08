@@ -1,0 +1,26 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+tqdm = "*"
+requests = "*"
+pycli = "*"
+pyinquirer = "*"
+yelpapi = "*"
+click = "*"
+pyfiglet = "*"
+pysmartdl = "*"
+urllib = "*"
+
+[requires]
+python_version = "3.7"
+
+[scripts]
+runDefault = "python src/main.py"
+runExample = "python src/main.py download http://www.cit.ctu.edu.vn/~dtnghi/oss/python.pdf"
+runModule = "python -m src"
+runSetup = "python setup.py develop"
