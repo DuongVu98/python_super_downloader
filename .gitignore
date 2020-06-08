@@ -8,3 +8,5 @@ Pipfile.lock
 
 *.pdf
 !spec/**/*.pdf
+
+!spec/**/*.egg-info
