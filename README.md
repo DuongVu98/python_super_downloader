@@ -4,10 +4,16 @@
 ### clone the source code
 
 ### install all packages
-##### pipenv update
+```bash
+pipenv update
+```
 
 ### run setup file to install all packages
-##### pipenv run runSetup
+```bash
+pipenv run runSetup
+```
 
 ### run the program
-##### pipenv runDefault
+```bash
+pipenv runDefault
+```
