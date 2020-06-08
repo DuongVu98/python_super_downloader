@@ -38,6 +38,12 @@ def other_main():
 def main():
     cmds.downloadManager()
 
+def draft():
+    from urllib.request import urlopen
+    link = "http://www.cit.ctu.edu.vn/~dtnghi/oss/python.pdf"
+    site = urlopen(link)
+    meta = site.info()
+    print(meta.get("Content-Length"))
 
 if __name__ == "__main__":
     main()
