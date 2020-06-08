@@ -1,6 +1,6 @@
 # Python Super Downloader
 
-## How to run
+## Setting up
 #### Clone the source code
 
 #### Generate lock file
@@ -19,7 +19,24 @@ pipenv install
 pipenv run runSetup
 ```
 
-#### Run the program
+#### Run the program to download sample url
 ```bash
-pipenv runDefault
+pipenv runExample
+```
+After commanding the downloaded pdf file locates in /downloaded folder
+
+## How to run program
+#### Option 1: Run from pipenv
+```bash
+pipenv run python src/main.py download <some-downloadable-url>
+```
+####Option 2: Using pipenv shell
+Go to pipenv virtual environment
+```bash
+pipenv shell
+```
+
+Run the program using command line
+```bash
+python src/main.py download <some-downloadable-uirl>
 ```
