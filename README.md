@@ -30,7 +30,7 @@ After commanding the downloaded pdf file locates in /downloaded folder
 ```bash
 pipenv run python src/main.py download <some-downloadable-url>
 ```
-####Option 2: Using pipenv shell
+#### Option 2: Using pipenv shell
 Go to pipenv virtual environment
 ```bash
 pipenv shell
