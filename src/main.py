@@ -43,4 +43,4 @@ def draft():
     local_filename, headers = urllib.request.urlretrieve('http://python.org/')
 
 if __name__ == "__main__":
-    draft()
+    main()
