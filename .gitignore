@@ -10,4 +10,4 @@ Pipfile.lock
 !spec/**/*.pdf
 
 !spec/**/*.egg-info
-src/downloader.egg-info
+src/downloader.egg-info/**
