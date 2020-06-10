@@ -5,7 +5,7 @@ from api import commands
 
 def display_trademark():
     figlet = Figlet(font="speed")
-    print(figlet.renderText("Stupid Downloader"))
+    print(figlet.renderText("Netprog Stupid Downloader"))
 
 
 def main():
@@ -13,14 +13,14 @@ def main():
 
 
 def draft():
-    from service.DownloadFiles import DownloadFiles
+    from service.DownloadFilesConcurrently import DownloadFilesConcurently
     urls = [
         "http://quatest1.com.vn/images/PHP-DocumentFull.pdf",
         "http://do1.dr-chuck.com/pythonlearn/EN_us/pythonlearn.pdf"
         "https://riptutorial.com/Download/node-js.pdf"
     ]
     destination = "downloaded"
-    d = DownloadFiles(urls, destination)
+    d = DownloadFilesConcurently(urls, destination)
     d.download()
 
 
