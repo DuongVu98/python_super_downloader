@@ -3,15 +3,14 @@ import urllib.request
 
 from service.DownloadProgressBar import DownloadProgressBar
 
-POOL = 8
 
-
-class DownloadFiles(object):
+class DownloadFilesConcurently(object):
     def __init__(self, urls, destination):
         self._urls = urls
         self._destination = destination
+        self._number_of_processes = len(urls)
 
-    def get_file(self, link):
+    def _get_file(self, link):
         filename = link.split('/')[-1]
 
         print('Downloading file --> "{filename}"'.format(filename=filename))
@@ -21,8 +20,8 @@ class DownloadFiles(object):
                                        reporthook=t.update_to)
 
     def download(self):
-        pool = Pool(POOL)
-        pool.map(self.get_file, self._urls)
+        pool = Pool(self._number_of_processes)
+        pool.map(self._get_file, self._urls)
 
         pool.close()
         pool.join()
