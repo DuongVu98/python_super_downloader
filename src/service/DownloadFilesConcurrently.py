@@ -2,6 +2,7 @@ from multiprocessing import Pool
 import urllib.request
 
 from service.ProgressBar import ProgressBar
+from concurrent.futures import ThreadPoolExecutor
 
 
 class DownloadFilesConcurently(object):
@@ -20,10 +21,13 @@ class DownloadFilesConcurently(object):
                                        reporthook=t.update_to)
 
     def download(self):
-        pool = Pool(self._number_of_processes)
-        pool.map(self._get_file, self._urls)
+        # pool = Pool(self._number_of_processes, initargs=(ProgressBar.get_lock(),))
+        # pool.map(self._get_file, self._urls)
+        #
+        # pool.close()
+        # pool.join()
 
-        pool.close()
-        pool.join()
+        pool = ThreadPoolExecutor()
+        pool.map(self._get_file, self._urls)
 
         print('\nSuccessfully downloaded files from given source!\n')

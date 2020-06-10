@@ -16,6 +16,7 @@ pyfiglet = "*"
 pysmartdl = "*"
 progressbar = "*"
 numpy = "*"
+colorama = "*"
 
 [requires]
 python_version = "3.7"

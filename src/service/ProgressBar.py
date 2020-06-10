@@ -1,4 +1,7 @@
 from tqdm import tqdm
+from colorama import Fore
+
+colors = Fore.__dict__
 
 
 class ProgressBar(tqdm):
