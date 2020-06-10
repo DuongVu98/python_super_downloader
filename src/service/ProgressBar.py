@@ -1,7 +1,7 @@
 from tqdm import tqdm
 
 
-class DownloadProgressBar(tqdm):
+class ProgressBar(tqdm):
 
     def update_to(self, b=1, bsize=1, tsize=None):
         if tsize is not None:

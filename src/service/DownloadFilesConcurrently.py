@@ -1,7 +1,7 @@
 from multiprocessing import Pool
 import urllib.request
 
-from service.DownloadProgressBar import DownloadProgressBar
+from service.ProgressBar import ProgressBar
 
 
 class DownloadFilesConcurently(object):
@@ -15,7 +15,7 @@ class DownloadFilesConcurently(object):
 
         print('Downloading file --> "{filename}"'.format(filename=filename))
 
-        with DownloadProgressBar(unit='B', unit_scale=True, miniters=1, desc=filename) as t:
+        with ProgressBar(unit='B', unit_scale=True, miniters=1, desc=filename) as t:
             urllib.request.urlretrieve(link, filename='{}/{}'.format(self._destination, filename),
                                        reporthook=t.update_to)
 

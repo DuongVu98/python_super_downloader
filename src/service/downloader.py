@@ -1,16 +1,16 @@
 import urllib.request
+import threading
 
-from service.DownloadProgressBar import DownloadProgressBar
+from service.ProgressBar import ProgressBar
 from service.ThreadedFetch import ThreadedFetch
 from service.DownloadFilesConcurrently import DownloadFilesConcurently
-import threading
 
 
 def download_default(url, destination, file_name):
     if file_name is None:
         file_name = url.split('/')[-1]
 
-    with DownloadProgressBar(unit='B', unit_scale=True, miniters=1, desc=file_name) as t:
+    with ProgressBar(unit='B', unit_scale=True, miniters=1, desc=file_name) as t:
         urllib.request.urlretrieve(url, filename="{}/{}".format(destination, file_name), reporthook=t.update_to)
 
 
@@ -31,7 +31,7 @@ def download_separated_threads(url, destination, file_name):
 def download_single_thread(url, destination, progress_bar_position):
     file_name = url.split('/')[-1]
 
-    with DownloadProgressBar(unit='B', unit_scale=True, miniters=1, desc=file_name,
+    with ProgressBar(unit='B', unit_scale=True, miniters=1, desc=file_name,
                              position=progress_bar_position) as t:
         urllib.request.urlretrieve(url, filename="{}/{}".format(destination, file_name), reporthook=t.update_to)
 

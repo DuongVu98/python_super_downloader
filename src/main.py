@@ -5,7 +5,7 @@ from api import commands
 
 def display_trademark():
     figlet = Figlet(font="speed")
-    print(figlet.renderText("Stupid Downloader"))
+    print(figlet.renderText("Netprog Stupid Downloader"))
 
 
 def main():
