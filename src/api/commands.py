@@ -1,5 +1,6 @@
 import click
 from service import downloader
+from service.PyInquireTemplate import PyInquirerHandler
 
 
 @click.group()
@@ -29,7 +30,6 @@ def download_separated_parts(url, destination, name):
 def download_multi_files(number_of_files, destination):
     print("hello")
 
-    from service.PyInquireTemplate import PyInquirerHandler
     inquirer = PyInquirerHandler()
     questions = [
         {
@@ -68,8 +68,64 @@ def make_single_question(i):
 
 
 @downloadManager.command(help="Download file from MediaFire")
-@click.argument("url")
+@click.option("--url", "-u", help="mediafire link for downloading")
 @click.option("--destination", "-d", default="downloaded", show_default=True, help="destination to save file")
 @click.option("--name", "-n", help="rename file")
 def download_from_mediafire(url, destination, name):
-    downloader.download_file_from_mediafire(url, destination, name)
+    if url is not None:
+        downloader.download_file_from_mediafire(url, destination, name)
+    else:
+        inquirer = PyInquirerHandler()
+        questions = [
+            {
+                "type": "list",
+                "name": "single-or-multi-question",
+                "message": "Do you want to download from single or multiple MediaFire links?: ",
+                "choices": ["Single link", "Multiple links"]
+            }
+        ]
+
+        single_or_multi_answer = inquirer.get_answer(questions)
+        choice = single_or_multi_answer["single-or-multi-question"]
+        if choice == "Single link":
+            single_file_question = [
+                {
+                    "type": "input",
+                    "name": "mediafire-link-input",
+                    "message": "Input MediaFire link"
+                }
+            ]
+            mediafire_link_answer = inquirer.get_answer(single_file_question)
+            downloader.download_file_from_mediafire(mediafire_link_answer["mediafire-link-input"], destination, name)
+        elif choice == "Multiple links":
+            number_of_links_questions = [
+                {
+                    "type": "input",
+                    "name": "number-of-links",
+                    "message": "Number of MediaFire links: "
+                }
+            ]
+            number_of_links_answer = inquirer.get_answer(number_of_links_questions)
+
+            input_links_questions = []
+            for i in range(1, int(number_of_links_answer["number-of-links"]) + 1):
+                input_links_questions.append(make_single_question(i))
+            input_links_answers = inquirer.get_answer(input_links_questions)
+
+            urls = []
+            for index, key in enumerate(input_links_answers):
+                urls.append(input_links_answers[key])
+
+            method_question = [
+                {
+                    "type": "list",
+                    "name": "method_question",
+                    "message": "Input the method to download",
+                    "choices": [
+                        "Multi-Threading",
+                        "Multi-Processing"
+                    ]
+                }
+            ]
+            method_answer = inquirer.get_answer(method_question)
+            downloader.download_multiple_files_from_mediafire(urls, destination, method=method_answer["method_question"])

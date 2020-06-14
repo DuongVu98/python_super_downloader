@@ -1,7 +1,7 @@
 import urllib.request
 import threading
 
-from service.MediaFireDownload import MediaFireDownload
+from service.MediaFireDownload import MediaFireDownload, MultiMediaFireDownload
 from service.ProgressBar import ProgressBar
 from service.ThreadedFetch import ThreadedFetch
 from service.DownloadFilesConcurrently import DownloadFilesConcurently
@@ -57,3 +57,12 @@ def download_multifiles_concurrently(urls, destination):
 def download_file_from_mediafire(url, destiation, name):
     mediafire_downloader = MediaFireDownload(url, destiation, name)
     mediafire_downloader.download()
+
+
+def download_multiple_files_from_mediafire(links, destination, method):
+    multiple_mediafire_downloader = MultiMediaFireDownload(links, destination)
+
+    if method == "Multi-Threading":
+        multiple_mediafire_downloader.download_parallelly()
+    elif method == "Multi-Processing":
+        multiple_mediafire_downloader.download_concurrently()
