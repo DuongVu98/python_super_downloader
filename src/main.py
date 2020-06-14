@@ -1,5 +1,5 @@
 from pyfiglet import Figlet
-from api import commands
+from api import commands, resume_commands, cli
 
 
 def display_trademark():
@@ -7,8 +7,12 @@ def display_trademark():
     print(figlet.renderText("Netprog Stupid Downloader"))
 
 
-def main():
+def download_commands():
     commands.downloadManager()
+
+
+def resume_download_commands():
+    resume_commands.resumeDownloadManager()
 
 
 def draft():
@@ -21,16 +25,10 @@ def draft():
     # destination = "downloaded"
     # d = DownloadFilesConcurently(urls, destination)
     # d.download()
-
-    import requests
-    r = requests.get("http://www.mediafire.com/file/0rdnw9gw2g6vdo7/1HCR12.pdf/file")
-    # print(r.text)
-
-    import re
-    result = re.findall('<a\s[^<]*href="(.*)">\s*Download', r.text)
-    print(result)
+    pass
 
 
 if __name__ == "__main__":
     display_trademark()
-    main()
+    cli.cli()
+    # draft()

@@ -15,9 +15,8 @@ def download_default(url, destination, file_name):
         urllib.request.urlretrieve(url, filename="{}/{}".format(destination, file_name), reporthook=t.update_to)
 
 
+
 def download_separated_threads(url, destination, file_name):
-    if file_name is None:
-        file_name = url.split('/')[-1]
 
     dl = ThreadedFetch(url, file_name)
     dl.start()
