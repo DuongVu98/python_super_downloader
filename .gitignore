@@ -1,12 +1,11 @@
 .idea/**
 
-downloaded/**
-
-dist/**
-
 Pipfile.lock
+
+**/downloaded/
+**/dist/
+**/*.egg-info/
 
 *.pdf
 !spec/**/*.pdf
 
-**/*.egg-info/
