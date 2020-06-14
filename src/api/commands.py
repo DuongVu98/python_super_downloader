@@ -1,5 +1,6 @@
 import click
 from service import downloader
+from service import resume_downloader
 
 
 @click.group()
@@ -12,7 +13,11 @@ def downloadManager():
 @click.option("--destination", "-d", default="downloaded", show_default=True, help="destination to save file")
 @click.option("--name", "-n", help="rename file")
 def download(url, destination, name):
-    downloader.download_default(url, destination, name)
+    try:
+        downloader.download_default(url, destination, name)
+    except KeyboardInterrupt:
+        print("Downloading session saved")
+        resume_downloader.save_session(url, destination=destination, file_name=name, link_type="direct")
 
 
 @downloadManager.command(help="Download file with separated parts")

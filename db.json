@@ -1,1 +1,11 @@
-{"_default": {"1": {"id": "9jjpf1hc", "url": "blah", "stopPos": 123, "fileName": "blahblah"}}}
+{
+  "_default": {
+    "1": {
+      "id": "1uebujcl",
+      "url": "http://do1.dr-chuck.com/pythonlearn/EN_us/pythonlearn.pdf",
+      "file_name": null,
+      "destination": "downloaded",
+      "link_type": "direct"
+    }
+  }
+}

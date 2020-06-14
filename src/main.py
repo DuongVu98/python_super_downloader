@@ -36,36 +36,36 @@ def draft():
     #     data = response.read()  # a `bytes` object
     #     out_file.write(data)
 
-    # import requests
-    # from tqdm import tqdm
-    #
-    # headers = {"Range": "bytes={}-".format(45000)}
-    # url = "http://do1.dr-chuck.com/pythonlearn/EN_us/pythonlearn.pdf"
-    # r = requests.get(url, stream=True, headers=headers)
-    # total_size = int(r.headers.get('content-length', 0))
-    # block_size = 1024
-    # t = tqdm(total=total_size, unit='iB', unit_scale=True)
-    # with open('downloaded/resumetest.pdf', 'ab') as f:
-    #     for data in r.iter_content(block_size):
-    #         t.update(len(data))
-    #         f.write(data)
-    # t.close()
+    import requests
+    from tqdm import tqdm
 
-    from tinydb import TinyDB, Query
-    import string, random
-    db = TinyDB("db.json")
-    lettersAndDigits = string.ascii_lowercase + string.digits
-    db.insert(
-        {
-            "id": ''.join((random.choice(lettersAndDigits) for i in range(8))),
-            "url": "blah",
-            "stopPos": 123,
-            "fileName": "blahblah"
-        }
-    )
+    headers = {"Range": "bytes={}-".format(770048)}
+    url = "http://do1.dr-chuck.com/pythonlearn/EN_us/pythonlearn.pdf"
+    r = requests.get(url, stream=True, headers=headers)
+    total_size = int(r.headers.get('content-length', 0))
+    block_size = 1024
+    t = tqdm(total=total_size, unit='iB', unit_scale=True)
+    with open('downloaded/pythonlearn.pdf', 'ab') as f:
+        for data in r.iter_content(block_size):
+            t.update(len(data))
+            f.write(data)
+    t.close()
+
+    # from tinydb import TinyDB, Query
+    # import string, random
+    # db = TinyDB("db.json")
+    # lettersAndDigits = string.ascii_lowercase + string.digits
+    # db.insert(
+    #     {
+    #         "id": ''.join((random.choice(lettersAndDigits) for i in range(8))),
+    #         "url": "blah",
+    #         "stopPos": 123,
+    #         "fileName": "blahblah"
+    #     }
+    # )
 
 
 if __name__ == "__main__":
     display_trademark()
-    # cli.cli()
-    draft()
+    cli.cli()
+    # draft()
