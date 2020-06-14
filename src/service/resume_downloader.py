@@ -1,4 +1,5 @@
 from tinydb import TinyDB, Query
+from tabulate import tabulate
 import string
 import random
 
@@ -11,7 +12,22 @@ def id_generate():
 
 
 def list_all_stopped_downloads():
-    print(db.all())
+    sessions = db.all()
+
+    table_headers = ["ID", "File name", "Link type"]
+    rows = []
+
+    for session in sessions:
+        id = session["id"]
+        url = session["url"]
+        file_name = session["file_name"]
+        destination = session["destination"]
+        link_type = session["link_type"]
+
+        rows.append([id, file_name, link_type])
+
+    print(tabulate(rows, table_headers, tablefmt="orgtbl"))
+
 
 
 def save_session(url, destination, file_name, link_type):

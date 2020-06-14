@@ -51,19 +51,6 @@ def draft():
             f.write(data)
     t.close()
 
-    # from tinydb import TinyDB, Query
-    # import string, random
-    # db = TinyDB("db.json")
-    # lettersAndDigits = string.ascii_lowercase + string.digits
-    # db.insert(
-    #     {
-    #         "id": ''.join((random.choice(lettersAndDigits) for i in range(8))),
-    #         "url": "blah",
-    #         "stopPos": 123,
-    #         "fileName": "blahblah"
-    #     }
-    # )
-
 
 if __name__ == "__main__":
     display_trademark()

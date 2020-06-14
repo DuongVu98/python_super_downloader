@@ -17,8 +17,6 @@ def download_default(url, destination, file_name):
 
 
 def download_separated_threads(url, destination, file_name):
-    if file_name is None:
-        file_name = url.split('/')[-1]
 
     dl = ThreadedFetch(url, file_name)
     dl.start()

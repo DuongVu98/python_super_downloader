@@ -13,6 +13,8 @@ def downloadManager():
 @click.option("--destination", "-d", default="downloaded", show_default=True, help="destination to save file")
 @click.option("--name", "-n", help="rename file")
 def download(url, destination, name):
+    if name is None:
+        name = url.split('/')[-1]
     try:
         downloader.download_default(url, destination, name)
     except KeyboardInterrupt:
