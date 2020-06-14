@@ -29,25 +29,43 @@ def draft():
     # import os
     # size = os.path.getsize("downloaded/PHP-DocumentFull.pdf")
 
-    import urllib.request
-    # headers = {"Range": "bytes={}-{}".format(0, 1000)}
+    # import urllib.request
+    # headers = {"Range": "bytes={}-{}".format(0, 45000)}
     # downloadRequest = urllib.request.Request(url="http://quatest1.com.vn/images/PHP-DocumentFull.pdf", headers=headers)
     # with urllib.request.urlopen(downloadRequest) as response, open("downloaded/resumetest.pdf", 'wb') as out_file:
     #     data = response.read()  # a `bytes` object
     #     out_file.write(data)
 
-    # headers = {"Range": "bytes={}-".format(1000)}
-    # downloadRequest = urllib.request.Request(url="http://quatest1.com.vn/images/PHP-DocumentFull.pdf", headers=headers)
-    # with urllib.request.urlopen(downloadRequest) as response, open("downloaded/resumetest.pdf", 'ab') as out_file:
-    #     data = response.read()  # a `bytes` object
-    #     out_file.write(data)
+    # import requests
+    # from tqdm import tqdm
+    #
+    # headers = {"Range": "bytes={}-".format(45000)}
+    # url = "http://do1.dr-chuck.com/pythonlearn/EN_us/pythonlearn.pdf"
+    # r = requests.get(url, stream=True, headers=headers)
+    # total_size = int(r.headers.get('content-length', 0))
+    # block_size = 1024
+    # t = tqdm(total=total_size, unit='iB', unit_scale=True)
+    # with open('downloaded/resumetest.pdf', 'ab') as f:
+    #     for data in r.iter_content(block_size):
+    #         t.update(len(data))
+    #         f.write(data)
+    # t.close()
 
-    opener = urllib.request.build_opener()
-    opener.addheaders = [('Range', 'bytes={}-'.format(1000))]
-    urllib.request.install_opener(opener)
-    urllib.request.urlretrieve("type URL here", "path/file_name")
+    from tinydb import TinyDB, Query
+    import string, random
+    db = TinyDB("db.json")
+    lettersAndDigits = string.ascii_lowercase + string.digits
+    db.insert(
+        {
+            "id": ''.join((random.choice(lettersAndDigits) for i in range(8))),
+            "url": "blah",
+            "stopPos": 123,
+            "fileName": "blahblah"
+        }
+    )
 
 
 if __name__ == "__main__":
     display_trademark()
-    cli.cli()
+    # cli.cli()
+    draft()

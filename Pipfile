@@ -17,6 +17,7 @@ pysmartdl = "*"
 progressbar = "*"
 numpy = "*"
 colorama = "*"
+tinydb = "*"
 
 [requires]
 python_version = "3.7"

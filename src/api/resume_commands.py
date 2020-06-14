@@ -1,4 +1,5 @@
 import click
+from service import resume_downloader
 
 
 @click.group()
@@ -8,7 +9,7 @@ def resumeDownloadManager():
 
 @resumeDownloadManager.command(help="List all stopped downloads")
 def list_all_stopped_downloads():
-    pass
+    resume_downloader.list_all_stopped_downloads()
 
 
 @resumeDownloadManager.command(help="Resume a stopped download")
