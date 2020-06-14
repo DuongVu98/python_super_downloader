@@ -30,6 +30,7 @@ def draft():
     result = re.findall('<a\s[^<]*href="(.*)">\s*Download', r.text)
     print(result)
 
+
 if __name__ == "__main__":
     display_trademark()
-    draft()
+    main()

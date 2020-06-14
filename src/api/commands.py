@@ -48,7 +48,6 @@ def download_multi_files(number_of_files, destination):
     answers = inquirer.get_answer(questions)
     print(answers)
 
-    # TODO process the answers
     urls = []
     for index, key in enumerate(answers):
         if index >= 1:
@@ -66,6 +65,7 @@ def make_single_question(i):
         "name": "input{}".format(i),
         "message": "Input the URL {}: ".format(i)
     }
+
 
 @downloadManager.command(help="Download file from MediaFire")
 @click.argument("url")
