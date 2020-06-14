@@ -9,3 +9,4 @@ Pipfile.lock
 *.pdf
 !spec/**/*.pdf
 
+db.json
