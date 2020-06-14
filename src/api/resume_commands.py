@@ -15,4 +15,4 @@ def list_all_stopped_downloads():
 @resumeDownloadManager.command(help="Resume a stopped download")
 @click.argument("session-id")
 def resume_download(session_id):
-    pass
+    resume_downloader.resume_download(session_id)
