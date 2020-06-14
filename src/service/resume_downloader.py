@@ -45,6 +45,26 @@ def save_session(url, destination, file_name, link_type):
     )
 
 
+def show_session_info(session_id):
+    result = db.search(query.id == session_id)
+
+    if result[0] is None:
+        print("There is no session with ID {}".format(session_id))
+    else:
+        session = result[0]
+        url = session["url"]
+        file_name = session["file_name"]
+        destination = session["destination"]
+        link_type = session["link_type"]
+
+    table_headers = ["Item", "Value"]
+    rows = [["ID", session_id], ["URL", url], ["File name", file_name], ["Destination", destination],
+            ["Link type", link_type]]
+
+    print("Session information of ID {}".format(session_id))
+    print(tabulate(rows, table_headers, tablefmt="psql"))
+
+
 def resume_download(session_id):
     result = db.search(query.id == session_id)
 
