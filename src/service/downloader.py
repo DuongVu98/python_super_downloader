@@ -4,7 +4,7 @@ import threading
 from service.MediaFireDownload import MediaFireDownload
 from service.ProgressBar import ProgressBar
 from service.ThreadedFetch import ThreadedFetch
-from service.DownloadFilesConcurrently import DownloadFilesConcurently
+from service.DownloadMultiFiles import DownloadFilesParallelly
 
 
 def download_default(url, destination, file_name):
@@ -35,19 +35,12 @@ def download_single_thread(url, destination, progress_bar_position):
 
 
 def download_multifiles_parallelly(urls, destination):
-    for i, url in enumerate(urls):
-        print("print the i --> {}".format(i))
-        thread = threading.Thread(target=download_single_thread, kwargs={
-            "url": url,
-            "destination": destination,
-            "progress_bar_position": i
-        })
-        # thread.setDaemon(True)
-        thread.start()
+    concurrent = DownloadFilesParallelly(urls, destination)
+    concurrent.download()
 
 
 def download_multifiles_concurrently(urls, destination):
-    concurrent = DownloadFilesConcurently(urls, destination)
+    concurrent = DownloadFilesParallelly(urls, destination)
     concurrent.download()
 
 
