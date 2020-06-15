@@ -60,10 +60,10 @@ def download_multi_files(number_of_files, destination):
 
         if answers["method_selection"] == "Multi-Threading":
             start_download = True
-            downloader.download_multifiles_parallelly(urls, destination)
+            downloader.download_multifiles_in_parallel(urls, destination)
         else:
             start_download = True
-            downloader.download_multifiles_concurrently(urls, destination)
+            downloader.download_multifiles_in_concurrency(urls, destination)
 
     except KeyboardInterrupt:
         print("stop")

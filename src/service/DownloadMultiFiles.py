@@ -27,8 +27,10 @@ class DownloadFilesParallelly(object):
 
 class DownloadFilesConcurrently(object):
 
-    def __init__(self):
-        pass
+    def __init__(self, urls, destination):
+        self._urls = urls
+        self._destination = destination
+        self._number_of_processes = len(urls)
 
     def _get_file(self, link):
         filename = link.split('/')[-1]
@@ -40,5 +42,6 @@ class DownloadFilesConcurrently(object):
                                        reporthook=t.update_to)
 
     def download(self):
-        pass
+        with ProcessPoolExecutor() as executor:
+            executor.map(self._get_file, self._urls)
 
