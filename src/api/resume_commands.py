@@ -4,6 +4,10 @@ from service import resume_downloader
 
 @click.group()
 def resumeDownloadManager():
+    """
+    All commands to manage all stopped download sessions
+    :return:
+    """
     pass
 
 

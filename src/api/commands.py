@@ -5,6 +5,10 @@ from service import resume_downloader
 
 @click.group()
 def downloadManager():
+    """
+    All commands to download file from specific url
+    :return:
+    """
     pass
 
 
