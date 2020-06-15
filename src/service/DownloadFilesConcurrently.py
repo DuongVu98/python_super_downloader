@@ -10,6 +10,7 @@ class DownloadFilesConcurently(object):
         self._urls = urls
         self._destination = destination
         self._number_of_processes = len(urls)
+        self._pool = ThreadPoolExecutor()
 
     def _get_file(self, link):
         filename = link.split('/')[-1]
@@ -27,7 +28,10 @@ class DownloadFilesConcurently(object):
         # pool.close()
         # pool.join()
 
-        pool = ThreadPoolExecutor()
-        pool.map(self._get_file, self._urls)
+        # pool = ThreadPoolExecutor()
+        self._pool.map(self._get_file, self._urls)
 
         print('\nSuccessfully downloaded files from given source!\n')
+
+    def stop(self):
+        self._pool.shutdown(wait=True)

@@ -44,6 +44,8 @@ def save_session(url, destination, file_name, link_type):
         }
     )
 
+    print("Downloading session saved")
+
 
 def show_session_info(session_id):
     result = db.search(query.id == session_id)

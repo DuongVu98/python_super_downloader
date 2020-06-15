@@ -15,9 +15,7 @@ def download_default(url, destination, file_name):
         urllib.request.urlretrieve(url, filename="{}/{}".format(destination, file_name), reporthook=t.update_to)
 
 
-
 def download_separated_threads(url, destination, file_name):
-
     dl = ThreadedFetch(url, file_name)
     dl.start()
     dl.join()
@@ -51,6 +49,12 @@ def download_multifiles_parallelly(urls, destination):
 def download_multifiles_concurrently(urls, destination):
     concurrent = DownloadFilesConcurently(urls, destination)
     concurrent.download()
+
+
+def stop_download_multifiles_concurrently():
+    from concurrent.futures.thread import ThreadPoolExecutor
+    pool = ThreadPoolExecutor()
+    pool.shutdown(wait=True)
 
 
 def download_file_from_mediafire(url, destiation, name):
