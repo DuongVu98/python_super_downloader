@@ -1,13 +1,12 @@
 .idea/**
 
-downloaded/**
-
-dist/**
-
 Pipfile.lock
+db.json
+.vscode
+
+**/downloaded/
+**/dist/
+**/*.egg-info/
 
 *.pdf
 !spec/**/*.pdf
-
-!spec/**/*.egg-info
-src/downloader.egg-info/**

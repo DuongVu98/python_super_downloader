@@ -8,5 +8,4 @@ src/downloader.egg-info/dependency_links.txt
 src/downloader.egg-info/top_level.txt
 src/service/__init__.py
 src/service/downloader.py
-src/service/downloader_separated_parts.py
 src/service/pausing.py

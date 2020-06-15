@@ -16,6 +16,9 @@ pyfiglet = "*"
 pysmartdl = "*"
 progressbar = "*"
 numpy = "*"
+colorama = "*"
+tinydb = "*"
+tabulate = "*"
 
 [requires]
 python_version = "3.7"
