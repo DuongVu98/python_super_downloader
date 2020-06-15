@@ -15,6 +15,7 @@ def progresser(n):
         tqdm.write("n == 6 completed.")
         tqdm.write("`tqdm.write()` is thread-safe in py3!")
 
+
 def draft():
     # from service.DownloadFilesConcurrently import DownloadFilesConcurently
     # urls = [
@@ -26,6 +27,7 @@ def draft():
     # d = DownloadFilesConcurently(urls, destination)
     # d.download()
     pass
+
 
 if __name__ == '__main__':
     with ThreadPoolExecutor() as p:

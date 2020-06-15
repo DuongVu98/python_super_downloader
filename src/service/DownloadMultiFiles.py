@@ -42,6 +42,8 @@ class DownloadFilesConcurrently(object):
                                        reporthook=t.update_to)
 
     def download(self):
-        with ProcessPoolExecutor() as executor:
-            executor.map(self._get_file, self._urls)
-
+        try:
+            with ProcessPoolExecutor() as executor:
+                executor.map(self._get_file, self._urls)
+        except KeyboardInterrupt:
+            raise
