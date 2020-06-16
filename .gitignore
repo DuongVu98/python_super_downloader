@@ -2,6 +2,7 @@
 
 Pipfile.lock
 db.json
+.vscode
 
 **/downloaded/
 **/dist/
