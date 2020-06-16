@@ -3,7 +3,7 @@ import threading
 
 from service.MediaFireDownload import MediaFireDownload, MultiMediaFireDownload
 from service.ProgressBar import ProgressBar
-from service.ThreadedFetch import ThreadedFetch
+from service.MultiParts import MultiParts
 from service.DownloadMultiFiles import DownloadFilesParallelly, DownloadFilesConcurrently
 
 
@@ -16,10 +16,10 @@ def download_default(url, destination, file_name):
 
 
 def download_separated_threads(url, destination, file_name):
-    dl = ThreadedFetch(url, file_name)
-    dl.start()
-    dl.join()
-    content = dl.get_file_data()
+    multi_parts_download = MultiParts(url, destination, file_name)
+    # dl.start()
+    # dl.join()
+    content = multi_parts_download.get_file_data()
     if content:
         with open("{}/{}".format(destination, file_name), 'w') as fh:
             fh.write(str(content))
