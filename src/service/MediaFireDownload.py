@@ -4,7 +4,7 @@ import threading
 import requests
 import urllib.request
 
-from service.DownloadFilesConcurrently import DownloadFilesConcurently
+from service.DownloadMultiFiles import DownloadFilesConcurrently, DownloadFilesParallelly
 from service.ProgressBar import ProgressBar
 
 media_fire_pattern = '<a\s[^<]*href="(.*)">\s*Download'
@@ -61,17 +61,11 @@ class MultiMediaFireDownload:
     def download_concurrently(self):
         self._get_all_download_urls()
 
-        concurrent = DownloadFilesConcurently(self._urls, self._destination)
+        concurrent = DownloadFilesConcurrently(self._urls, self._destination)
         concurrent.download()
 
     def download_parallelly(self):
         self._get_all_download_urls()
 
-        for i, url in enumerate(self._urls):
-            print("print the i --> {}".format(i))
-            thread = threading.Thread(target=download_single_thread, kwargs={
-                "url": url,
-                "destination": self._destination,
-                "progress_bar_position": i
-            })
-            thread.start()
+        parallel = DownloadFilesParallelly(self._urls, self._destination)
+        parallel.download()
