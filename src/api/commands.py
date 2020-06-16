@@ -111,7 +111,12 @@ def download_from_mediafire(url, destination, name):
                 }
             ]
             mediafire_link_answer = inquirer.get_answer(single_file_question)
-            downloader.download_file_from_mediafire(mediafire_link_answer["mediafire-link-input"], destination, name)
+
+            try:
+                downloader.download_file_from_mediafire(mediafire_link_answer["mediafire-link-input"], destination, name)
+            except KeyboardInterrupt:
+                resume_downloader.save_session(url, destination=destination, file_name=name, link_type="mediafire")
+
         elif choice == "Multiple links":
             number_of_links_questions = [
                 {

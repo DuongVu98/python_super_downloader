@@ -6,6 +6,8 @@ import random
 import requests
 import os
 
+from service.MediaFireDownload import get_url_from_mediafire_link
+
 db = TinyDB("db.json")
 query = Query()
 
@@ -93,5 +95,25 @@ def resume_download(session_id):
                     t.update(len(data))
                     f.write(data)
             t.close()
+        elif link_type == "mediafire":
+            download_url = get_url_from_mediafire_link(url)
+            headers = {"Range": "bytes={}-".format(size)}
+            r = requests.get(download_url, stream=True, headers=headers)
+            total_size = int(r.headers.get('content-length', 0))
+            block_size = 1024
+            t = tqdm(total=total_size, unit='iB', unit_scale=True)
+            with open(full_file_name, 'ab') as f:
+                for data in r.iter_content(block_size):
+                    t.update(len(data))
+                    f.write(data)
+            t.close()
 
     db.remove(query.id == session_id)
+
+
+def delete_session(session_id):
+    db.remove(query.id == session_id)
+
+
+def delete_all_sessions():
+    db.truncate()

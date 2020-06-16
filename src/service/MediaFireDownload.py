@@ -10,12 +10,18 @@ from service.ProgressBar import ProgressBar
 media_fire_pattern = '<a\s[^<]*href="(.*)">\s*Download'
 
 
-def download_single_thread(url, destination, progress_bar_position):
+def _download_single_thread(url, destination, progress_bar_position):
     file_name = url.split('/')[-1]
 
     with ProgressBar(unit='B', unit_scale=True, miniters=1, desc=file_name,
                      position=progress_bar_position) as t:
         urllib.request.urlretrieve(url, filename="{}/{}".format(destination, file_name), reporthook=t.update_to)
+
+
+def get_url_from_mediafire_link(link):
+    r = requests.get(link)
+    regex_results = re.findall(media_fire_pattern, r.text)
+    return regex_results[0]
 
 
 class MediaFireDownload:
@@ -35,7 +41,7 @@ class MediaFireDownload:
     def download(self):
         download_url = self._get_download_url()
 
-        download_single_thread(download_url, self._destination, 0)
+        _download_single_thread(download_url, self._destination, 0)
 
 
 class MultiMediaFireDownload:

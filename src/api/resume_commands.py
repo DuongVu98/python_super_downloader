@@ -1,5 +1,6 @@
 import click
 from service import resume_downloader
+from service.PyInquireTemplate import PyInquirerHandler
 
 
 @click.group()
@@ -22,3 +23,40 @@ def show_session_info(session_id):
 @click.argument("session-id")
 def resume_download(session_id):
     resume_downloader.resume_download(session_id)
+
+
+@resumeDownloadManager.command(help="Delete existing session")
+@click.option("--id", "-i", help="ID of the session")
+def delete(id):
+    if id:
+        resume_downloader.delete_session(id)
+    else:
+        inquirer = PyInquirerHandler()
+        questions = [
+            {
+                "type": "list",
+                "name": "delete-all-or-not",
+                "message": "Do you want to delete all sessions?",
+                "choices": ["Yes", "No"]
+            }
+        ]
+
+        delete_all_or_not_answer = inquirer.get_answer(questions)
+        choice = delete_all_or_not_answer["delete-all-or-not"]
+
+        if choice == "No":
+            input_id_question = [
+                {
+                    "type": "input",
+                    "name": "session-id-input",
+                    "message": "Input Session ID"
+                }
+            ]
+
+            input_id = inquirer.get_answer(input_id_question)["session-id-input"]
+            resume_downloader.delete_session(input_id)
+
+        elif choice == "Yes":
+            resume_downloader.delete_all_sessions()
+            print("Delete all sessions")
+
