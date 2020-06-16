@@ -16,17 +16,19 @@ def downloadManager():
 @click.option("--name", "-n", help="rename file")
 @click.option("--partial", "-p", help="Download file with multiple separated parts")
 def download(url, destination, name, partial):
-    if name is None:
-        name = url.split('/')[-1]
+    try:
+        downloader.download_default(url, destination, name, partial)
+    except KeyboardInterrupt:
+        resume_downloader.save_session(url, destination=destination, file_name=name, link_type="direct")
 
-    if partial is None:
-        try:
-            downloader.download_default(url, destination, name)
-        except KeyboardInterrupt:
-            resume_downloader.save_session(url, destination=destination, file_name=name, link_type="direct")
-    elif partial is not None:
-        multi_downloads = MultiParts(url, file_name=name, destination=destination, number_of_parts=partial)
-        multi_downloads.download()
+    # if partial is None:
+    #     try:
+    #         downloader.download_default(url, destination, name)
+    #     except KeyboardInterrupt:
+    #         resume_downloader.save_session(url, destination=destination, file_name=name, link_type="direct")
+    # elif partial is not None:
+    #     multi_downloads = MultiParts(url, file_name=name, destination=destination, number_of_parts=partial)
+    #     multi_downloads.download()
 
 
 @downloadManager.command(help="Download file with separated parts")

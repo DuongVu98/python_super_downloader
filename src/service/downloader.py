@@ -7,12 +7,16 @@ from service.MultiParts import MultiParts
 from service.DownloadMultiFiles import DownloadFilesParallelly, DownloadFilesConcurrently
 
 
-def download_default(url, destination, file_name):
+def download_default(url, destination, file_name, partial):
     if file_name is None:
         file_name = url.split('/')[-1]
 
-    with ProgressBar(unit='B', unit_scale=True, miniters=1, desc=file_name) as t:
-        urllib.request.urlretrieve(url, filename="{}/{}".format(destination, file_name), reporthook=t.update_to)
+    if partial is None:
+        with ProgressBar(unit='B', unit_scale=True, miniters=1, desc=file_name) as t:
+            urllib.request.urlretrieve(url, filename="{}/{}".format(destination, file_name), reporthook=t.update_to)
+    elif partial is not None:
+        multi_downloads = MultiParts(url, file_name=file_name, destination=destination, number_of_parts=int(partial))
+        multi_downloads.download()
 
 
 def download_separated_threads(url, destination, file_name):
